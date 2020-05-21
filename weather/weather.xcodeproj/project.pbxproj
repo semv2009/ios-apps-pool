@@ -13,6 +13,10 @@
 		9A64E362246D411700AA0C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A64E360246D411700AA0C77 /* Main.storyboard */; };
 		9A64E364246D411900AA0C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A64E363246D411900AA0C77 /* Assets.xcassets */; };
 		9A64E367246D411900AA0C77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A64E365246D411900AA0C77 /* LaunchScreen.storyboard */; };
+		9ADB036024702F3B00F900F1 /* apiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB035F24702F3B00F900F1 /* apiKey.swift */; };
+		9ADB03632470306D00F900F1 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB03622470306D00F900F1 /* HttpRequest.swift */; };
+		9ADB03662470362F00F900F1 /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB03652470362F00F900F1 /* WeatherFetcher.swift */; };
+		9ADB0368247430BA00F900F1 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB0367247430BA00F900F1 /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		9A64E363246D411900AA0C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A64E366246D411900AA0C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A64E368246D411900AA0C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9ADB035F24702F3B00F900F1 /* apiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiKey.swift; sourceTree = "<group>"; };
+		9ADB03622470306D00F900F1 /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		9ADB03652470362F00F900F1 /* WeatherFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFetcher.swift; sourceTree = "<group>"; };
+		9ADB0367247430BA00F900F1 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,8 @@
 		9A64E359246D411700AA0C77 /* weather */ = {
 			isa = PBXGroup;
 			children = (
+				9ADB03612470302F00F900F1 /* services */,
+				9ADB035E24702F0800F900F1 /* env */,
 				9A64E35A246D411700AA0C77 /* AppDelegate.swift */,
 				9A64E35C246D411700AA0C77 /* SceneDelegate.swift */,
 				9A64E370246E852700AA0C77 /* Model */,
@@ -87,8 +97,34 @@
 		9A64E370246E852700AA0C77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9ADB0367247430BA00F900F1 /* Weather.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9ADB035E24702F0800F900F1 /* env */ = {
+			isa = PBXGroup;
+			children = (
+				9ADB035F24702F3B00F900F1 /* apiKey.swift */,
+			);
+			path = env;
+			sourceTree = "<group>";
+		};
+		9ADB03612470302F00F900F1 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				9ADB0364247035EC00F900F1 /* api */,
+				9ADB03622470306D00F900F1 /* HttpRequest.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		9ADB0364247035EC00F900F1 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				9ADB03652470362F00F900F1 /* WeatherFetcher.swift */,
+			);
+			path = api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,9 +198,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ADB03662470362F00F900F1 /* WeatherFetcher.swift in Sources */,
 				9A64E35F246D411700AA0C77 /* ViewController.swift in Sources */,
 				9A64E35B246D411700AA0C77 /* AppDelegate.swift in Sources */,
+				9ADB036024702F3B00F900F1 /* apiKey.swift in Sources */,
+				9ADB03632470306D00F900F1 /* HttpRequest.swift in Sources */,
 				9A64E35D246D411700AA0C77 /* SceneDelegate.swift in Sources */,
+				9ADB0368247430BA00F900F1 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

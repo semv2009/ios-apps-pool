@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     
+    let weatherApi = WeatherApi()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,8 +31,8 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text ?? "Fail")
-        
+        weatherApi.fetchWeather(city: textField.text ?? "Fail")
+
         return true
     }
     
