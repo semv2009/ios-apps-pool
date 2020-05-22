@@ -64,10 +64,10 @@
 		9A64E359246D411700AA0C77 /* weather */ = {
 			isa = PBXGroup;
 			children = (
-				9ADB03612470302F00F900F1 /* services */,
-				9ADB035E24702F0800F900F1 /* env */,
 				9A64E35A246D411700AA0C77 /* AppDelegate.swift */,
 				9A64E35C246D411700AA0C77 /* SceneDelegate.swift */,
+				9ADB035E24702F0800F900F1 /* env */,
+				9ADB03612470302F00F900F1 /* services */,
 				9A64E370246E852700AA0C77 /* Model */,
 				9A64E36F246E7EC700AA0C77 /* View */,
 				9A64E36E246E7B1F00AA0C77 /* Controller */,

@@ -8,24 +8,16 @@
 
 import Foundation
 
-class WeatherApi {
+class WeatherFetcher {
     let httpRequest: HttpRequest
     
     init() {
         httpRequest = HttpRequest(baseUrl: "https://api.openweathermap.org/data/2.5")
     }
     
-    func fetchWeather(city: String) {
-        httpRequest.get(path: "/weather", params: "q=\(city)") { weatherData in
-            switch weatherData {
-            case .success(let weather):
-                print(weather)
-            case .failure(let error):
-                print("Source of randomness failed: \(error)")
-            }
-        }
-        
-        
+    func fetchCityWeather(at city: String, responseDataHandler: @escaping (Result<Weather, RequestError>) -> Void) {
+        httpRequest.get(path: "/weather", params: "q=\(city)", responseDataHandler: responseDataHandler)
+                
         print("urlRequest: \(city)")
     }
 }

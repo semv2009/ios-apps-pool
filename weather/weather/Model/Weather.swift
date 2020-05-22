@@ -10,7 +10,7 @@ import Foundation
 
 struct Weather: Decodable {
     let name: String
-    let temperature: Double
+    let temperature: String
     let description: String
     
     
@@ -25,7 +25,7 @@ struct Weather: Decodable {
         name = try container.decode(String.self, forKey: .name)
 
         let main = try container.decode(WeatherMain.self, forKey: .main)
-        temperature = main.temperature
+        temperature = String(Int(main.temperature.rounded()))
         
         let weather = try container.decode([WeatherDescription].self, forKey: .weather)
         description = weather[0].description

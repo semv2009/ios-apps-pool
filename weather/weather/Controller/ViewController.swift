@@ -9,20 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     
-    let weatherApi = WeatherApi()
+    let weatherFetcher = WeatherFetcher()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchTextField.delegate = self
     }
-
+    
     @IBAction func searchPressed(_ sender: UIButton) {
         searchTextField.endEditing(true)
     }
@@ -31,8 +31,23 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        weatherApi.fetchWeather(city: textField.text ?? "Fail")
-
+        
+        if let city = textField.text {
+            weatherFetcher.fetchCityWeather(at: city) { responseData in
+                switch responseData {
+                case .success(let weather):
+                    print(weather)
+                    DispatchQueue.main.async {
+                        self.cityLabel.text = weather.name
+                        self.temperatureLabel.text = weather.temperature
+                    }
+                case .failure(let error):
+                    print("Error of weather request: \(error)")
+                }
+            }
+        }
+        
+        
         return true
     }
     

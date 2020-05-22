@@ -8,22 +8,18 @@
 
 import Foundation
 
-enum WeatherError: Error {
-    case weatherErrorMessage
+enum RequestError: Error {
+    case message(String)
 }
 
-protocol HttpMethods {
-    func get(path: String, params: String, responseDataHandler: @escaping (Result<Weather, WeatherError>) -> Void)
-}
-
-class HttpRequest: HttpMethods {
+class HttpRequest {
     private let baseUrl: String
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
     }
     
-    func get(path: String, params: String, responseDataHandler: @escaping (Result<Weather, WeatherError>) -> Void) {
+    func get<T: Decodable>(path: String, params: String, responseDataHandler: @escaping (Result<T, RequestError>) -> Void) {
         let urlString = "\(baseUrl)\(path)?appid=\(API_KEY)&units=metric&\(params)"
         print(urlString)
 
@@ -39,12 +35,12 @@ class HttpRequest: HttpMethods {
                 let decoder = JSONDecoder()
                 
                 do {
-                    let weather = try decoder.decode(Weather.self, from: data)
-                    print("weather: \(weather)")
-                    responseDataHandler(.success(weather))
+                    let responseData = try decoder.decode(T.self, from: data)
+                    print("response data: \(responseData)")
+                    responseDataHandler(.success(responseData))
                 } catch {
-                    print("Error to decode weather object \(error)")
-                    responseDataHandler(.failure(.weatherErrorMessage))
+                    print("Error to decode response data \(error)")
+                    responseDataHandler(.failure(.message("Error to decode response data")))
                 }
                 
             }
