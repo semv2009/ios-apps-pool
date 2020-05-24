@@ -13,42 +13,38 @@ enum RequestError: Error {
 }
 
 class HttpRequest {
-    private let baseUrl: String
+    let urlComponents: URLComponents
     
-    init(baseUrl: String) {
-        self.baseUrl = baseUrl
+    init(urlComponents: URLComponents) {
+        self.urlComponents = urlComponents
     }
     
-    func get<T: Decodable>(path: String, params: String, responseDataHandler: @escaping (Result<T, RequestError>) -> Void) {
-        let urlString = "\(baseUrl)\(path)?appid=\(API_KEY)&units=metric&\(params)"
-        print(urlString)
-
-        guard let url = URL(string: urlString) else { fatalError("URL object is'n valid") }
+    func get<T: Decodable>(with urlComponents: URLComponents, responseDataHandler: @escaping (Result<T, RequestError>) -> Void) {
+        
+        guard let url = urlComponents.url else {
+            print("Invalid URL")
+            return
+        }
 
         let dataTask = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("Request error: \(error)")
                 return
             }
-
+            
             if let data = data {
                 let decoder = JSONDecoder()
                 
                 do {
                     let responseData = try decoder.decode(T.self, from: data)
-                    print("response data: \(responseData)")
                     responseDataHandler(.success(responseData))
                 } catch {
-                    print("Error to decode response data \(error)")
                     responseDataHandler(.failure(.message("Error to decode response data")))
                 }
                 
             }
         }
-
+        
         dataTask.resume()
     }
 }
-
-
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}

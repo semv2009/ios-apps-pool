@@ -12,6 +12,31 @@ struct Weather: Decodable {
     let name: String
     let temperature: String
     let description: String
+
+    private let weatherId: Int
+    
+    var weatherIconName: String {
+        get {
+            switch weatherId {
+            case 200...232:
+                return "cloud.bolt"
+            case 300...321:
+                return "cloud.drizzle"
+            case 500...531:
+                return "cloud.rain"
+            case 600...622:
+                return "cloud.snow"
+            case 701...781:
+                return "cloud.fog"
+            case 800:
+                return "sun.max"
+            case 801...804:
+                return "cloud.bolt"
+            default:
+                return "cloud"
+            }
+        }
+    }
     
     
     enum CodingKeys: String, CodingKey {
@@ -29,6 +54,7 @@ struct Weather: Decodable {
         
         let weather = try container.decode([WeatherDescription].self, forKey: .weather)
         description = weather[0].description
+        weatherId = weather[0].weatherId
     }
 }
 
@@ -47,13 +73,16 @@ struct WeatherMain: Decodable {
 
 struct WeatherDescription: Decodable {
     let description: String
+    let weatherId: Int
     
     enum CodingKeys: String, CodingKey {
         case description
+        case id
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         description = try container.decode(String.self, forKey: .description)
+        weatherId = try container.decode(Int.self, forKey: .id)
     }
 }
